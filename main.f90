@@ -8,7 +8,7 @@ program Uebungsaufgabe
   ! Zuerst den simplen LAPLACE'schen Entwicklungssatz
   ! Mittels Rekursion, iterativ geht das glaube ich nicht.
 
-  open (10,file='matrixA.txt')
+  open (10,file='matrixB.txt')
   read(10,*) n
   allocate(A(n,n))
 
