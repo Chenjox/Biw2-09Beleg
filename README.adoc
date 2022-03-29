@@ -9,7 +9,7 @@ Um das Projekt zu kompilieren bedarf es folgender Befehlszeile
 .Befehl für den gfortran compiler
 [source,bash]
 ----
-gfortran main.f90 -o HierDenNamenAusfüllen
+gfortran hilfsfunktionen.f90 laplaceNaiv.f90 main.f90 -o Beleg.exe
 ----
 
 Damit das Programm nicht abstürtzt muss die richtige `matrix.txt` mit im Ordner sein.
@@ -30,6 +30,6 @@ n . . .
 == Todo
 
 - [*] Aufgabe 1: Laplace implementieren
-- [ ] Aufgabe 2: Pivotisieung implementieren
-- [ ] Aufgabe 3: Laufzeitdatenerhebung bei unterschiedlichen Algorithmen
+- [ ] Aufgabe 2: Entwicklung nach der Spalte mit den meisten Nullelementen
+- [ ] Aufgabe 3: Pivotisierung und Laufzeitdatenerhebung bei unterschiedlichen Algorithmen
 - [ ] Aufgabe 4: Automatische Visualisierung der Ergebnisse
