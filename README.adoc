@@ -9,7 +9,7 @@ Um das Projekt zu kompilieren bedarf es folgender Befehlszeile
 .Befehl für den gfortran compiler
 [source,bash]
 ----
-gfortran hilfsfunktionen.f90 laplaceNaiv.f90 main.f90 -o Beleg.exe
+gfortran hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 main.f90 -o Beleg.exe
 ----
 
 Damit das Programm nicht abstürtzt muss die richtige `matrix.txt` mit im Ordner sein.
@@ -36,13 +36,19 @@ n . . .
 | Funktion
 
 | `main.f90`
-| Hier wird die `matrix.txt` eingelesen und die Subroutinen werden aufgerufen
+| Hier wird die `matrix.txt` eingelesen und die Subroutinen werden aufgerufen.
 
 | `laplaceNaiv.f90`
-| Hier wird der naive Laplace Algorithmus implementiert, welcher immer nach der ersten Spalte entwickelt
+| Hier wird der naive Laplace Algorithmus implementiert, welcher immer nach der ersten Spalte entwickelt.
+
+| `laplaceAbsuchen.f90`
+| Hier wird der Laplace Algorithmus implementiert, welcher immer nach Spalte oder Zeile mit den meisten Nullen entwickelt.
+
+| `Dreiecksform.f90`
+| Hier wird der Algorithmus zur Berechnung der Determinante aus der Vorlesung implementiert.
 
 | `hilfsfunktionen.f90`
-| Hier sind alle Hilfsfunktionen, die in mehreren Algorithmen verwendet werden, aufgelistet.
+| Hier sind alle Hilfsfunktionen, die in mehreren Algorithmen verwendet werden, implementiert.
 
 | `matrix_.txt`
 | Dies sind Testmatrizen zum Testen des Codes.
