@@ -44,7 +44,7 @@ end subroutine
 recursive function laplace(A, n) result(d)
   integer:: n          ! Groesse
   real   :: A(n,n)     ! Die Matrix an sich.
-  real   :: d         ! Determinante
+  real   :: d,h        ! Determinante und Platzhalter
   real                :: B(n-1,n-1) ! Die Untermatrix
   integer             :: i,j,k      ! Zeilen und Spaltenindezes
   interface
@@ -62,18 +62,23 @@ recursive function laplace(A, n) result(d)
     return
   end if
 
-  !Hier machen wir mal etwas
+  !Hier wird nach der ersten Spalte entwickelt!
   do i = 1, n
-    d = A(i,1)
+    h = A(i,1)
+    if(h.eq.0.0) then
+      exit
+    endif
     ! Dann holen wir uns die Untermatrix
     B = UnterMatrix(A,n,i,1)
 
-    !write(*,*) 'A()=',A(i,1)
-    !do k = 1, n-1
-    !  write(*,*) (B(k,j), j=1,n-1)
-    !end do
+    ! Hier holen wir uns die Debug info
+    write(*,*) 'A()=',A(i,1)
+    do k = 1, n-1
+      write(*,*) (B(k,j), j=1,n-1)
+    end do
 
-    d = -d + A(i,1)*laplace(B,n-1)
+    ! Letztlich die Determinante
+    d = -d + h*A(i,1)*laplace(B,n-1)
   end do
 end function laplace
 
@@ -83,14 +88,14 @@ function UnterMatrix(A,n,z,s)
   real   :: UnterMatrix(n-1,n-1)
   integer :: i,j
 
-  do i = 1, n
+  zeilen: do i = 1, n
     if ( i.eq.z ) then ! Die Zeile mit Index i wird ignoriert
-      continue
+      cycle zeilen
     end if
-    do j = 1, n
-      if ( j.eq.s ) then ! Die Spalte mit index j wird ignoriert
-        continue
-      else if ( j.gt.s ) then ! Ist j größer als m dann müssen wir immer eins von j abziehen
+    spalten: do j = 1, n
+      if ( j.eq.s ) then ! Die Spalte mit index s wird ignoriert
+        cycle spalten
+      else if ( j.gt.s ) then ! Ist j größer als s dann müssen wir immer eins von j abziehen
         if(i.gt.z) then
           UnterMatrix(i-1,j-1) = A(i,j)
         else
@@ -103,6 +108,6 @@ function UnterMatrix(A,n,z,s)
           UnterMatrix(i,j) = A(i,j)
         end if
       end if
-    end do
-  end do
+    end do spalten
+  end do zeilen
 end function UnterMatrix
