@@ -56,6 +56,11 @@ subroutine determinanteLaplaceMitAbsuchen(A,n,det)
     zeilenNullen = 0
   end do
 
+  ! Abprüfen des Sonderfalls n = kandidatNullen, also hat eine Zeile genauso viele Nullen wie sie Spalten oder Zeilen hat
+  if ( zeilenKandidatNullen.eq.n.or.spaltenKandidatNullen.eq.n ) then
+    det = 0
+    return
+  end if
   ! Eventuelles Transponieren der Matrix
   ! Wenn eine Zeile mehr nullen hat, als eine Spalte, dann müssen wir transponieren
   if(zeilenKandidatNullen.gt.spaltenKandidatNullen) then

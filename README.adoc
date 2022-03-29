@@ -57,6 +57,6 @@ n . . .
 == Todo
 
 - [*] Aufgabe 1: Laplace implementieren
-- [ ] Aufgabe 2: Entwicklung nach der Spalte mit den meisten Nullelementen
+- [*] Aufgabe 2: Entwicklung nach der Spalte mit den meisten Nullelementen
 - [ ] Aufgabe 3: Pivotisierung und Laufzeitdatenerhebung bei unterschiedlichen Algorithmen
 - [ ] Aufgabe 4: Automatische Visualisierung der Ergebnisse
