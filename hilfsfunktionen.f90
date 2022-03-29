@@ -6,11 +6,6 @@ function UnterMatrix(A,n,z,s)
   real   :: UnterMatrix(n-1,n-1)
   integer :: i,j
 
-  !write(*,*) 'z=',z,',s=',s
-  !do i = 1, n
-  !  write(*,*) (A(i,j), j=1,n)
-  !end do
-
   zeilen: do i = 1, n
     if ( i.eq.z ) then ! Die Zeile mit Index i wird ignoriert
       cycle zeilen
@@ -34,7 +29,17 @@ function UnterMatrix(A,n,z,s)
     end do spalten
   end do zeilen
 
-  !do i = 1, n-1
-  !  write(*,*) (UnterMatrix(i,j), j=1,n-1)
-  !end do
 end function UnterMatrix
+
+function TranspoMatrix(A,n)
+  implicit none
+  integer :: n,i,j
+  real :: A(n,n)
+  real :: TranspoMatrix(n,n)
+
+  do i = 1, n
+    do j = 1, n
+      TranspoMatrix(i,j) = A(j,i)
+    end do
+  end do
+end function TranspoMatrix
