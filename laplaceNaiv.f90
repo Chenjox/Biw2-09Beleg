@@ -7,7 +7,6 @@ subroutine determinanteLaplace(A,n,det)
   real    :: det             !
   real    :: laplace         !
   integer :: n               !
-  integer :: i,j,k           !
 
   ! Vorbelegung der Variablen
   !**************************************************************************!
@@ -21,7 +20,7 @@ recursive function laplace(A, n) result(d)
   real   :: A(n,n)     ! Die Matrix an sich.
   real   :: d,h        ! Determinante und Platzhalter
   real                :: B(n-1,n-1) ! Die Untermatrix
-  integer             :: i,j,k      ! Zeilen und Spaltenindezes
+  integer             :: i,j     ! Zeilen und Spaltenindezes
   interface
     function UnterMatrix(A,n,z,s)
       integer :: n,z,s

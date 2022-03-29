@@ -5,18 +5,17 @@ subroutine determinanteLaplaceMitAbsuchen(A,n,det)
 
   real    :: A(n,n)          ! A(Spalte, Zeile)
   real    :: det             !
-  real    :: laplaceNachSpalte            !
+  real    :: laplaceMitAbsuchen            !
   integer :: n
-  integer :: i,j,k           !
 
   ! Vorbelegung der Variablen
   !**************************************************************************!
 
-  det = laplaceNachSpalte(A,n)
+  det = laplaceMitAbsuchen(A,n)
 
 end subroutine
 
-recursive function laplaceNachSpalte(A, n) result(d)
+recursive function laplaceMitAbsuchen(A, n) result(d)
 
   implicit none
   integer:: n        ! Groesse und Spalte der Matrix nach der entwickelt wird.
@@ -27,7 +26,7 @@ recursive function laplaceNachSpalte(A, n) result(d)
   integer :: spaltenKandidatNullen,zeilenKandidatNullen ! Zeilenabsuche
   integer :: spaltenKandidat,zeilenKandidat,s ! die Tatsächliche Zeile oder Spalte
   real                :: B(n-1,n-1) ! Die Untermatrix
-  integer             :: i,j,k      ! Zeilen und Spaltenindezes
+  integer             :: i,j        ! Zeilen und Spaltenindezes
   interface
     function UnterMatrix(A,n,z,s)
       integer :: n,z,s
@@ -109,9 +108,9 @@ recursive function laplaceNachSpalte(A, n) result(d)
     B = UnterMatrix(T,n,i,s)
 
     ! Und davon letztlich die Determinante
-    d = -d + h*laplaceNachSpalte(B,n-1)
+    d = -d + h*laplaceMitAbsuchen(B,n-1)
   end do
   if(mod(s,2).eq.1) then ! Sollten wir nach einer ungeraden Spalte entwickeln (s / 2 = x Rest 1 ergeben) dann tausche das Vorzeichen
     d = -d
   endif
-end function laplaceNachSpalte
+end function laplaceMitAbsuchen
