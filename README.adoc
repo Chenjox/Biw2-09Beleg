@@ -29,7 +29,7 @@ n . . .
 
 == Todo
 
-- [X] Aufgabe 1: Laplace implementieren
+- [*] Aufgabe 1: Laplace implementieren
 - [ ] Aufgabe 2: Pivotisieung implementieren
 - [ ] Aufgabe 3: Laufzeitdatenerhebung bei unterschiedlichen Algorithmen
 - [ ] Aufgabe 4: Automatische Visualisierung der Ergebnisse
