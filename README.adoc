@@ -27,6 +27,27 @@ n . . .
 
 `n` entspricht der Größe der nachfolgenden **quadratischen** Matrix
 
+== Dateierläuterung
+
+.Übersicht über alle Dateien
+[cols="1,4"]
+|===
+| Dateiname
+| Funktion
+
+| `main.f90`
+| Hier wird die `matrix.txt` eingelesen und die Subroutinen werden aufgerufen
+
+| `laplaceNaiv.f90`
+| Hier wird der naive Laplace Algorithmus implementiert, welcher immer nach der ersten Spalte entwickelt
+
+| `hilfsfunktionen.f90`
+| Hier sind alle Hilfsfunktionen, die in mehreren Algorithmen verwendet werden, aufgelistet.
+
+| `matrix_.txt`
+| Dies sind Testmatrizen zum Testen des Codes.
+|===
+
 == Todo
 
 - [*] Aufgabe 1: Laplace implementieren
