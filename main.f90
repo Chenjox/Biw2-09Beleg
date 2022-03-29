@@ -7,7 +7,7 @@ program Uebungsaufgabe
   ! Zuerst den simplen LAPLACE'schen Entwicklungssatz
   ! Mittels Rekursion, iterativ geht das glaube ich nicht.
 
-  open (10,file='matrixB.txt')
+  open (10,file='matrixA.txt')
   read(10,*) n
   allocate(A(n,n))
 
@@ -65,21 +65,17 @@ recursive function laplace(A, n) result(d)
   !Hier wird nach der ersten Spalte entwickelt!
   do i = 1, n
     h = A(i,1)
-    if(h.eq.0.0) then
-      exit
+    if(h.eq.0.0) then ! Sollte das Element 0.0 sein, dann sparen wir uns den Aufwand
+      d = -d
+      cycle ! Daher überspringen wir diese Iteration
     endif
-    ! Dann holen wir uns die Untermatrix
+    ! Sonst holen wir uns die Untermatrix
     B = UnterMatrix(A,n,i,1)
 
-    ! Hier holen wir uns die Debug info
-    write(*,*) 'A()=',A(i,1)
-    do k = 1, n-1
-      write(*,*) (B(k,j), j=1,n-1)
-    end do
-
-    ! Letztlich die Determinante
-    d = -d + h*A(i,1)*laplace(B,n-1)
+    ! Und davon letztlich die Determinante
+    d = -d + h*laplace(B,n-1)
   end do
+  d = -d
 end function laplace
 
 function UnterMatrix(A,n,z,s)
@@ -87,6 +83,11 @@ function UnterMatrix(A,n,z,s)
   real    :: A(n,n)
   real   :: UnterMatrix(n-1,n-1)
   integer :: i,j
+
+  !write(*,*) 'z=',z,',s=',s
+  !do i = 1, n
+  !  write(*,*) (A(i,j), j=1,n)
+  !end do
 
   zeilen: do i = 1, n
     if ( i.eq.z ) then ! Die Zeile mit Index i wird ignoriert
@@ -110,4 +111,8 @@ function UnterMatrix(A,n,z,s)
       end if
     end do spalten
   end do zeilen
+
+  !do i = 1, n-1
+  !  write(*,*) (UnterMatrix(i,j), j=1,n-1)
+  !end do
 end function UnterMatrix
