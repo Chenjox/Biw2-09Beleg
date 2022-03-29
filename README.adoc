@@ -1,0 +1,28 @@
+= BIW2-09 Beleg
+
+Dieses Repository trackt meinen Fortschritt bei diesem Beleg.
+
+Momentan beinhaltet es alle Testdateien, sowie alles was nicht das resultat eines Compilierungsvorganges ist.
+
+Um das Projekt zu kompilieren bedarf es folgender Befehlszeile
+
+.Befehl für den gfortran compiler
+[source,bash]
+----
+gfortran main.f90 -o HierDenNamenAusfüllen
+----
+
+Damit das Programm nicht abstürtzt muss die richtige `matrix.txt` mit im Ordner sein.
+
+Alle Dateien die eingelesen werden entsprechen folgendem Format
+
+[source]
+----
+n
+1 2 . n
+2 3 . .
+. . . .
+n . . .
+----
+
+`n` entspricht der Größe der nachfolgenden **quadratischen** Matrix
