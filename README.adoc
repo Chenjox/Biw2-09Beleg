@@ -2,7 +2,7 @@
 
 Dieses Repository trackt meinen Fortschritt bei diesem Beleg.
 
-Momentan beinhaltet es alle Testdateien, sowie alles was nicht das resultat eines Compilierungsvorganges ist.
+Momentan beinhaltet es alle Testdateien, sowie alles was nicht das Resultat eines Kompilierungsvorganges ist.
 
 Um das Projekt zu kompilieren bedarf es folgender Befehlszeile
 
@@ -26,3 +26,10 @@ n . . .
 ----
 
 `n` entspricht der Größe der nachfolgenden **quadratischen** Matrix
+
+== Todo
+
+- [X] Aufgabe 1: Laplace implementieren
+- [ ] Aufgabe 2: Pivotisieung implementieren
+- [ ] Aufgabe 3: Laufzeitdatenerhebung bei unterschiedlichen Algorithmen
+- [ ] Aufgabe 4: Automatische Visualisierung der Ergebnisse
