@@ -16,9 +16,9 @@ subroutine determinanteLaplace(A,n,det)
 end subroutine
 
 recursive function laplace(A, n) result(d)
-  integer:: n          ! Groesse
-  real   :: A(n,n)     ! Die Matrix an sich.
-  real   :: d,h        ! Determinante und Platzhalter
+  integer :: n          ! Groesse
+  real    :: A(n,n)     ! Die Matrix an sich.
+  real    :: d,h        ! Determinante und Platzhalter
   real                :: B(n-1,n-1) ! Die Untermatrix
   integer             :: i,j     ! Zeilen und Spaltenindezes
   interface
