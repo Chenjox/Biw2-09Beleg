@@ -16,7 +16,7 @@ matrix/
 *.so
 *.dylib
 *.dll
-
+__*
 # Fortran module files
 *.mod
 *.smod
@@ -32,3 +32,4 @@ matrix/
 *.out
 *.app
 *.bat
+*.csv
