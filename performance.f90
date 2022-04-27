@@ -19,13 +19,19 @@ subroutine performance(maxGroesse, maxDurchlauf, dichteInkrement)
   groesse = 0
 
   ! maxDichte
-  maxDichte = mod(100,dichteInkrement) * 10
+  maxDichte = 100
+  !if(maxDichte.eq.0) maxDichte = 100 / dichteInkrement
+
+  open(unit=30,file='performance.csv')
+  write(unit=30,fmt='(A34)') 'groesse,dichte,zeit1,zeit2,zeit3'
 
   do groesse = 1, maxGroesse
+    write(*,*) groesse
     allocate(matrix(groesse,groesse)) ! Die Matrix ist groesse x groesse
     do dichte = dichteInkrement, maxDichte, dichteInkrement
+      write(*, *) dichte
       do durchlauf=1, maxDurchlauf
-        call zufallMatrix(matrix,groesse,20) ! Zufallige belegung der Matrix
+        call zufallMatrix(matrix,groesse,dichte) ! Zufallige belegung der Matrix
         call cpu_time(startTime)
         call determinanteLaplace(matrix, groesse, determinant)
         call cpu_time(finishTime)
@@ -36,7 +42,7 @@ subroutine performance(maxGroesse, maxDurchlauf, dichteInkrement)
       ! TODO Hier kommt noch das schreiben in eine Datei
       timeTaken = 0.0 ! Alle Variablen zurücksetzen!
       do durchlauf=1, maxDurchlauf
-        call zufallMatrix(matrix,groesse,20) ! Zufallige belegung der Matrix
+        call zufallMatrix(matrix,groesse,dichte) ! Zufallige belegung der Matrix
         call cpu_time(startTime)
         call determinanteLaplaceMitAbsuchen(matrix, groesse, determinant)
         call cpu_time(finishTime)
@@ -47,7 +53,7 @@ subroutine performance(maxGroesse, maxDurchlauf, dichteInkrement)
       ! TODO Hier kommt noch das schreiben in eine Datei
       timeTaken = 0.0 ! Alle Variablen zurücksetzen!
       do durchlauf=1, maxDurchlauf
-        call zufallMatrix(matrix,groesse,20) ! Zufallige belegung der Matrix
+        call zufallMatrix(matrix,groesse,dichte) ! Zufallige belegung der Matrix
         call cpu_time(startTime)
         call determinanteDreiecksform(matrix, groesse, determinant)
         call cpu_time(finishTime)
@@ -57,21 +63,11 @@ subroutine performance(maxGroesse, maxDurchlauf, dichteInkrement)
       zeiten(3) = timeTaken
       timeTaken = 0.0 ! Alle Variablen zurücksetzen!
 
-      write (1, '(1x, F, 3(",", F))') groesse, dichteInkrement, zeiten(1), zeiten(2), zeiten(3)
+      write (30, '(I2,",",I3,3(",", F16.8))') groesse, dichte, zeiten(1), zeiten(2), zeiten(3)
     end do
     deallocate(matrix) ! Die Matrix muss freigegeben werden.
   end do
-  !write (1, '(1x, F, 3(",", F))')
-  !sehr dünn besetzt
 
-
-
-  !dünn besetzt
-
-  !halb besetzt
-
-  !dicht besetzt
-
-  !nahezu voll besetzt
+  close(unit=30)
 
 end subroutine performance
