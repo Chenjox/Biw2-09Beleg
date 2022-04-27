@@ -44,12 +44,12 @@ function TranspoMatrix(A,n)
   end do
 end function TranspoMatrix
 
-subroutine zufallMatrix(A,n,dichte)
+subroutine zufallMatrix(Z,n,dichte)
 implicit none
 integer n,i,k
 real u,v
 real dichte
-
+real :: Z(n,n)
   Z=0
   do i=1,n
       do k=1,n

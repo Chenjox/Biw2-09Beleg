@@ -12,6 +12,14 @@ Um das Projekt zu kompilieren bedarf es folgender Befehlszeile
 gfortran hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 main.f90 -o Beleg.exe
 ----
 
+Um die Performance zu testen muss folgendermaßen kompiliert werden
+
+.Befehl für den gfortran compiler
+[source,bash]
+----
+gfortran performance.f90 hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 main2.f90 -o Beleg2.exe
+----
+
 Damit das Programm nicht abstürtzt muss die richtige `matrix.txt` mit im Ordner sein.
 
 Alle Dateien die eingelesen werden entsprechen folgendem Format
@@ -49,6 +57,9 @@ n . . .
 
 | `hilfsfunktionen.f90`
 | Hier sind alle Hilfsfunktionen, die in mehreren Algorithmen verwendet werden, implementiert.
+
+| `performance.f90`
+| Hier ist der Algorithmus zum Errechnen der Performance Zeiten implementiert.
 
 | `matrix_.txt`
 | Dies sind Testmatrizen zum Testen des Codes.
