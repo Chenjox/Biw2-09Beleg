@@ -27,7 +27,7 @@ recursive function laplaceMitAbsuchen(A, n) result(d)
   integer :: spaltenKandidat,zeilenKandidat,s ! die Tatsächliche Zeile oder Spalte
   real                :: B(n-1,n-1) ! Die Untermatrix
   integer             :: i,j        ! Zeilen und Spaltenindezes
-  interface
+  interface ! Interfaces damit der gfortran Kompiler nicht meckert
     function UnterMatrix(A,n,z,s)
       integer :: n,z,s
       real    :: A(n,n)
@@ -76,7 +76,7 @@ recursive function laplaceMitAbsuchen(A, n) result(d)
         zeilenNullen = zeilenNullen + 1
       end if
     end do
-    if ( zeilenNullen.gt.zeilenKandidatNullen ) then ! Haben wir eine Spalten gefunden mit mehr nullen, dann wechseln wir den Kandidaten
+    if ( zeilenNullen.gt.zeilenKandidatNullen ) then ! Haben wir eine Zeile gefunden mit mehr nullen, dann wechseln wir den Kandidaten
       zeilenKandidat = j
       zeilenKandidatNullen = zeilenNullen
     end if
