@@ -1,0 +1,208 @@
+\documentclass[10pt,DIV=15,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pgfplotstable}
+\usetikzlibrary{plotmarks}
+
+\pgfplotsset{
+    discard if not/.style 2 args={
+        x filter/.code={
+            \edef\tempa{\thisrow{#1}}
+            \edef\tempb{#2}
+            \ifx\tempa\tempb
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+
+\pgfplotscreateplotcyclelist{mylist}{
+  {blue,mark=x},
+  {olive,mark=+},
+  {red,mark=o},
+  {lime,mark=diamond},
+  {violet,mark=triangle}% <-- don't add a comma here
+}
+
+\begin{document}
+
+  \newcommand{\datatablename}{performance.csv}
+  %\pgfplotstableread[col sep=comma]{performance.csv}\datatable
+  \newcommand{\performanceplot}[2]{
+    \addplot+ [
+      sharp plot,
+      discard if not={dichte}{#1}
+    ] table[x=groesse,y=#2,col sep=comma] {\datatablename};
+  }
+
+  \section{Vergleich der Komplexität der Algorithmen bei gleichem Besetzungsgrad}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[cycle list name=mylist]
+
+      \performanceplot{20}{zeit1}
+      \performanceplot{20}{zeit2}
+      \performanceplot{20}{zeit3}
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten der unterschiedlichen Algorithmen bei $20\%$ Besetzungsgrad}
+  \end{figure}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[cycle list name=mylist]
+
+      \performanceplot{40}{zeit1}
+      \performanceplot{40}{zeit2}
+      \performanceplot{40}{zeit3}
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten der unterschiedlichen Algorithmen bei $40\%$ Besetzungsgrad}
+  \end{figure}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[cycle list name=mylist]
+
+      \performanceplot{60}{zeit1}
+      \performanceplot{60}{zeit2}
+      \performanceplot{60}{zeit3}
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten der unterschiedlichen Algorithmen bei $60\%$ Besetzungsgrad}
+  \end{figure}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[cycle list name=mylist]
+
+      \performanceplot{80}{zeit1}
+      \performanceplot{80}{zeit2}
+      \performanceplot{80}{zeit3}
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten der unterschiedlichen Algorithmen bei $80\%$ Besetzungsgrad}
+  \end{figure}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[
+        xlabel={Grösse der Matrix},
+        ylabel=Zeit,
+       % align right:
+       legend style={
+       cells={anchor=east},
+       legend pos=outer north east,
+       },
+       cycle list name=mylist
+       ]
+
+      \performanceplot{100}{zeit1}
+      \performanceplot{100}{zeit2}
+      \performanceplot{100}{zeit3}
+      \legend{\textsc{Laplace}, \textsc{Laplace} mit Absuchen, Dreiecksform}
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten der unterschiedlichen Algorithmen bei $100\%$ Besetzungsgrad}
+  \end{figure}
+
+  \section{Vergleich der Komplexität des einzelnen Algorithmus bei unterschiedlichen Besetzungsgraden}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[
+        xlabel={Grösse der Matrix},
+        ylabel=Zeit,
+       % align right:
+       legend style={
+       cells={anchor=east},
+       legend pos=outer north east,
+       }
+       ]
+
+      \performanceplot{20}{zeit1}
+      \performanceplot{40}{zeit1}
+      \performanceplot{60}{zeit1}
+      \performanceplot{80}{zeit1}
+      \performanceplot{100}{zeit1}
+
+      \legend{$20\%$,$40\%$,$60\%$,$80\%$,$100\%$}
+
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten des naiven \textsc{Laplace}schen Entwicklungssatzes bei unterschiedlichen Besetzungsgraden}
+  \end{figure}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[
+        xlabel={Grösse der Matrix},
+        ylabel=Zeit,
+       % align right:
+       legend style={
+       cells={anchor=east},
+       legend pos=outer north east,
+       }
+       ]
+
+      \performanceplot{20}{zeit2}
+      \performanceplot{40}{zeit2}
+      \performanceplot{60}{zeit2}
+      \performanceplot{80}{zeit2}
+      \performanceplot{100}{zeit2}
+
+      \legend{$20\%$,$40\%$,$60\%$,$80\%$,$100\%$}
+
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten des \textsc{Laplace}schen Entwicklungssatzes mit Absuchen bei unterschiedlichen Besetzungsgraden}
+  \end{figure}
+
+  \begin{figure}[h]
+  \centering
+    \begin{tikzpicture}
+      \begin{axis}[
+        xlabel={Grösse der Matrix},
+        ylabel=Zeit,
+       % align right:
+       legend style={
+       cells={anchor=east},
+       legend pos=outer north east,
+       }
+       ]
+
+      \performanceplot{20}{zeit3}
+      \performanceplot{40}{zeit3}
+      \performanceplot{60}{zeit3}
+      \performanceplot{80}{zeit3}
+      \performanceplot{100}{zeit3}
+
+      \legend{$20\%$,$40\%$,$60\%$,$80\%$,$100\%$}
+
+      \end{axis}
+    \end{tikzpicture}
+  \caption{Laufzeitverhalten des Überführens in Dreiecksform bei unterschiedlichen Besetzungsgraden}
+  \end{figure}
+
+\end{document}
