@@ -43,3 +43,26 @@ function TranspoMatrix(A,n)
     end do
   end do
 end function TranspoMatrix
+
+subroutine zufallMatrix(A,n,dichte)
+implicit none
+integer n,i,k
+real u,v
+real dichte
+
+  Z=0
+  do i=1,n
+      do k=1,n
+          call random_number(u)    !Funktion erzeugt Pseudozufallszahl von 0 bis 1
+          v = FLOOR(101*u)        !Zahlen von 0 bis 100, die Zufallszahl mal 101 erzeugt Zahl von 1-100, FLOOR() rundet ab
+          if(v.lt.dichte) then    !Falls die Zufallszahl kleiner als unsere geforderte Dichte, dann Erzeuge in der Zelle eine Null
+              Z(i,k)=0
+          else                    !Sonst fülle die Zelle mit einer Zufallszahl
+              call random_number(u)
+              v = FLOOR(9*u) + 1    !Rechen die Zufallszahl +1 damit keine Null erzeugt wird
+              Z(i,k)=v
+          endif
+      enddo
+  enddo
+
+end subroutine
