@@ -7,7 +7,7 @@ subroutine performance(maxGroesse, maxDurchlauf, dichteInkrement)
   integer :: dichteInkrement
   real, allocatable :: matrix(:,:)
   integer :: durchlauf, maxDichte, dichte
-  real :: zeiten(3)
+  real :: zeiten(4)
   real :: startTime, finishTime, timeTaken
   real :: determinant
 
@@ -51,13 +51,23 @@ subroutine performance(maxGroesse, maxDurchlauf, dichteInkrement)
 
         zeiten(3) = zeiten(3) + finishTime - startTime
 
+        call cpu_time(startTime)
+        call determinanteDreiecksformPivotisierung(matrix, groesse, determinant)
+        call cpu_time(finishTime)
+
+        zeiten(4) = zeiten(4) + finishTime - startTime
+
       end do
 
       zeiten(1) = zeiten(1)/maxDurchlauf
       zeiten(2) = zeiten(2)/maxDurchlauf
       zeiten(3) = zeiten(3)/maxDurchlauf
+      zeiten(4) = zeiten(4)/maxDurchlauf
 
-      write (30, '(I2,",",I3,3(",", F16.8))') groesse, dichte, zeiten(1), zeiten(2), zeiten(3)
+      write (30, '(I2,",",I3,4(",", e32.16))') groesse, dichte, zeiten(1), &
+                                                                zeiten(2), &
+                                                                zeiten(3), &
+                                                                zeiten(4)
 
       zeiten = 0.0
       ! Die Matrix muss freigegeben werden.
