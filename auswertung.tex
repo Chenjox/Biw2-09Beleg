@@ -39,6 +39,14 @@
 
 \begin{document}
 
+  \title{Laufzeitauswertung der Belegaufgabe}
+
+  \maketitle
+
+  \tableofcontents
+
+  \listoffigures
+
   \newcommand{\datatablename}{performance.csv}
   %\pgfplotstableread[col sep=comma]{performance.csv}\datatable
   \newcommand{\performanceplot}[2]{
@@ -86,7 +94,7 @@
     \begin{figure}[h]
     \centering
       \plottingDichte[max]{#1}
-    \caption{Größte der unterschiedlichen Algorithmen bei $#1\%$ Besetzungsgrad.}
+    \caption{Größte Laufzeit der unterschiedlichen Algorithmen bei $#1\%$ Besetzungsgrad.}
     \end{figure}
   }
 
@@ -104,8 +112,7 @@
 
   \section{Vergleich der Komplexität des einzelnen Algorithmus bei unterschiedlichen Besetzungsgraden}
 
-  \begin{figure}[h]
-  \centering
+  \newcommand{\groessenPlot}[1]{
     \begin{tikzpicture}
       \begin{axis}[
         xlabel={Grösse der Matrix},
@@ -117,68 +124,47 @@
        }
        ]
 
-      \performanceplot{20} {Zeit1}
-      \performanceplot{40} {Zeit1}
-      \performanceplot{60} {Zeit1}
-      \performanceplot{80} {Zeit1}
-      \performanceplot{100}{Zeit1}
+      \performanceplot{20} {#1}
+      \performanceplot{40} {#1}
+      \performanceplot{60} {#1}
+      \performanceplot{80} {#1}
+      \performanceplot{100}{#1}
 
       \legend{$20\%$,$40\%$,$60\%$,$80\%$,$100\%$}
 
       \end{axis}
     \end{tikzpicture}
+  }
+
+  \begin{figure}[h]
+  \centering
+    \groessenPlot{Zeit1}
+    \groessenPlot{minZeit1}
+    \groessenPlot{maxZeit1}
   \caption{Laufzeitverhalten des naiven \textsc{Laplace}schen Entwicklungssatzes bei unterschiedlichen Besetzungsgraden}
   \end{figure}
 
   \begin{figure}[h]
   \centering
-    \begin{tikzpicture}
-      \begin{axis}[
-        xlabel={Grösse der Matrix},
-        ylabel=Zeit,
-       % align right:
-       legend style={
-       cells={anchor=east},
-       legend pos=outer north east,
-       }
-       ]
-
-      \performanceplot{20} {Zeit2}
-      \performanceplot{40} {Zeit2}
-      \performanceplot{60} {Zeit2}
-      \performanceplot{80} {Zeit2}
-      \performanceplot{100}{Zeit2}
-
-      \legend{$20\%$,$40\%$,$60\%$,$80\%$,$100\%$}
-
-      \end{axis}
-    \end{tikzpicture}
+    \groessenPlot{Zeit2}
+    \groessenPlot{minZeit2}
+    \groessenPlot{maxZeit2}
   \caption{Laufzeitverhalten des \textsc{Laplace}schen Entwicklungssatzes mit Absuchen bei unterschiedlichen Besetzungsgraden}
   \end{figure}
 
   \begin{figure}[h]
   \centering
-    \begin{tikzpicture}
-      \begin{axis}[
-        xlabel={Grösse der Matrix},
-        ylabel=Zeit,
-       % align right:
-       legend style={
-       cells={anchor=east},
-       legend pos=outer north east,
-       }
-       ]
+    \groessenPlot{Zeit3}
+    \groessenPlot{minZeit3}
+    \groessenPlot{maxZeit3}
+  \caption{Laufzeitverhalten des Überführens in Dreiecksform bei unterschiedlichen Besetzungsgraden}
+  \end{figure}
 
-      \performanceplot{20} {Zeit3}
-      \performanceplot{40} {Zeit3}
-      \performanceplot{60} {Zeit3}
-      \performanceplot{80} {Zeit3}
-      \performanceplot{100}{Zeit3}
-
-      \legend{$20\%$,$40\%$,$60\%$,$80\%$,$100\%$}
-
-      \end{axis}
-    \end{tikzpicture}
+  \begin{figure}[h]
+  \centering
+    \groessenPlot{Zeit4}
+    \groessenPlot{minZeit4}
+    \groessenPlot{maxZeit4}
   \caption{Laufzeitverhalten des Überführens in Dreiecksform bei unterschiedlichen Besetzungsgraden}
   \end{figure}
 
