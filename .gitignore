@@ -34,6 +34,8 @@ __*
 *.bat
 *.csv
 
+*.lof
+*.toc
 *.aux
 *.log
 *.synctex.gz
