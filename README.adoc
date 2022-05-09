@@ -9,7 +9,7 @@ Um das Projekt zu kompilieren bedarf es folgender Befehlszeile
 .Befehl für den gfortran compiler
 [source,bash]
 ----
-gfortran hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 main.f90 -o Beleg.exe
+gfortran hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 DreiecksformPivotisierung.f90 main.f90 -o Beleg.exe
 ----
 
 Um die Performance zu testen muss folgendermaßen kompiliert werden
@@ -17,7 +17,7 @@ Um die Performance zu testen muss folgendermaßen kompiliert werden
 .Befehl für den gfortran compiler
 [source,bash]
 ----
-gfortran performance.f90 hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 main2.f90 -o Beleg2.exe
+gfortran performance.f90 hilfsfunktionen.f90 Dreiecksform.f90 laplaceNaiv.f90 laplaceAbsuchen.f90 DreiecksformPivotisierung.f90 main2.f90 -o Beleg2.exe
 ----
 
 Damit das Programm nicht abstürtzt muss die richtige `matrix.txt` mit im Ordner sein.

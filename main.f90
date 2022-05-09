@@ -1,6 +1,6 @@
 program Uebungsaufgabe
   implicit none
-  real :: determinantA,determinantB,determinantC
+  real :: determinantA,determinantB,determinantC,determinantD
   real :: start, finish
   real, allocatable :: A(:,:)         ! Matrix, für die die Determinante berechnet wird
   integer           ::  n             ! Größe der Matrix A
@@ -30,9 +30,15 @@ program Uebungsaufgabe
   call cpu_time(finish)
   write(*,*) 'Determinante C; t=',finish-start
 
+  call cpu_time(start)
+  call determinanteDreiecksform(A, n, determinantD)
+  call cpu_time(finish)
+  write(*,*) 'Determinante D; t=',finish-start
+
   write(*,*) 'Determinante A=',determinantA
   write(*,*) 'Determinante B=',determinantB
   write(*,*) 'Determinante C=',determinantC
+  write(*,*) 'Determinante D=',determinantD
 
   read (*,*)
 
