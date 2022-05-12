@@ -15,16 +15,16 @@ function UnterMatrix(A,n,z,s)
         cycle spalten
       else if ( j.gt.s ) then ! Ist j größer als s dann müssen wir immer eins von j abziehen
         if(i.gt.z) then
-          UnterMatrix(i-1,j-1) = A(i,j)
+          UnterMatrix(i-1,j-1) = A(i,j) !wevon j>s und i>z von beiden 1 abziehen
         else
-          UnterMatrix(i,j-1) = A(i,j)
+          UnterMatrix(i,j-1) = A(i,j) !wenn nur j>s nur von j (spalten) 1 abziehen
         end if
       else ! j ist kleiner als s
         if(i.gt.z) then
-          UnterMatrix(i-1,j) = A(i,j)
+          UnterMatrix(i-1,j) = A(i,j) !wenn nur i>z nur von i (zeilen) 1 abziehen
         else
           UnterMatrix(i,j) = A(i,j)
-        end if
+        end if ! wenn beides kleiner oder gleich nichts abziehen
       end if
     end do spalten
   end do zeilen

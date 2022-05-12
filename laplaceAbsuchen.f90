@@ -18,7 +18,7 @@ end subroutine
 recursive function laplaceMitAbsuchen(A, n) result(d)
 
   implicit none
-  integer:: n        ! Groesse und Spalte der Matrix nach der entwickelt wird.
+  integer:: n          ! Groesse und Spalte der Matrix nach der entwickelt wird.
   real   :: A(n,n)     ! Die Matrix an sich.
   real   :: T(n,n)     ! Die eventuell transponierte Matrix
   real   :: d,h        ! Determinante und Platzhalter
@@ -42,28 +42,28 @@ recursive function laplaceMitAbsuchen(A, n) result(d)
 
   d = 0.0
   if(n.eq.1) then !Basisfall ist abbruchbedingung
-    d = A(1,1)
+    d = A(1,1)    !wenn Matrixgröße=1, Det=Wert der Matrix
     return
   end if
 
-  spaltenNullen = 0
-  spaltenKandidat = 1
-  spaltenKandidatNullen = 0
+  spaltenNullen = 0   !Startwert Spaltennullen = 0
+  spaltenKandidat = 1 !Spalte mit aktuell meisten Nullen
+  spaltenKandidatNullen = 0 !Wie viele Nullen hat aktueller Kandidat
   zeilenNullen = 0
   zeilenKandidat = 1
   zeilenKandidatNullen = 0
 
   ! Durchsuchen der Spalten
   !
-  do i = 1, n ! Jede Spalte
-    do j = 1, n
+  do i = 1, n ! Spalten werden von 1 bis n hochgezählt
+    do j = 1, n !Zeilen für aktuelle Spalte werden hochgezählt, bis alle spalten abgesucht sind
       if ( A(i,j).eq.0.0 ) then
         spaltenNullen = spaltenNullen + 1
       end if
     end do
     if ( spaltenNullen.gt.spaltenKandidatNullen ) then ! Haben wir eine Spalten gefunden mit mehr nullen, dann wechseln wir den Kandidaten
-      spaltenKandidat = i
-      spaltenKandidatNullen = spaltenNullen
+      spaltenKandidat = i !Spalte in der wir uns gerade befinden ist neuer Spaltenkndidat
+      spaltenKandidatNullen = spaltenNullen !Nullen in Kandidat sind Spaltennullen
     end if
     spaltenNullen = 0
   end do
@@ -90,12 +90,13 @@ recursive function laplaceMitAbsuchen(A, n) result(d)
   end if
   ! Eventuelles Transponieren der Matrix
   ! Wenn eine Zeile mehr nullen hat, als eine Spalte, dann müssen wir transponieren
+  !s ist zeile oder spalte nach der entwicklt wird
   if(zeilenKandidatNullen.gt.spaltenKandidatNullen) then
     T = TranspoMatrix(A,n)
-    s = zeilenKandidat
+    s = zeilenKandidat !wenn zeilenkandidat größer als spaltenkandidat ist s zeilenkandidat
   else
     T = A
-    s = spaltenKandidat
+    s = spaltenKandidat !wenn spaltenkandidat größer als zeilenkandidat ist s spaltenkandidat
   end if
   !Hier wird endlich nach der Spalte s entwickelt!
   do i = 1, n

@@ -50,7 +50,7 @@ subroutine determinanteDreiecksformPivotisierung(A,n,det)
     ! Wir müssen pro Zeile alles durchsuchen und den geeignetsten Kandidaten finden.
     kandidat = k+1
     do j=k+1, n
-      if(abs(A_diag(j,k)).gt.abs(A_diag(kandidat,k))) then
+      if(abs(A_diag(j,k)).gt.abs(A_diag(kandidat,k))) then !hier suchen wir die größte Zahl
         kandidat = j
       end if
     end do
