@@ -48,14 +48,14 @@ subroutine zufallMatrix(Z,n,dichte)
 implicit none
 integer n,i,k
 real u,v
-real dichte
+integer dichte
 real :: Z(n,n)
   Z=0
   do i=1,n
       do k=1,n
           call random_number(u)    !Funktion erzeugt Pseudozufallszahl von 0 bis 1
           v = FLOOR(101*u)        !Zahlen von 0 bis 100, die Zufallszahl mal 101 erzeugt Zahl von 1-100, FLOOR() rundet ab
-          if(v.gt.dichte) then    !Falls die Zufallszahl kleiner als unsere geforderte Dichte, dann Erzeuge in der Zelle eine Null
+          if(v.lt.dichte) then    !Falls die Zufallszahl kleiner als unsere geforderte Dichte, dann Erzeuge in der Zelle eine Null
               Z(i,k)=0
           else                    !Sonst fülle die Zelle mit einer Zufallszahl
               call random_number(u)
